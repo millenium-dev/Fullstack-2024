@@ -1,0 +1,29 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    activate server
+    server redirects the request
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    deactivate server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: css file
+    deactivate server
+
+    browser->>server: https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>: js file
+    deactivate server
+
+    Browser executes JS code that retrieves the JSON from the server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>: [ { "content": "SLOW", "date": "2024-04-07T03:12:22.638Z"}, ...]
+    deactivate server
+
+    Browser executes the function that renders the notes on the screen
+    
